@@ -14,9 +14,7 @@ const DataFilters = ({searched}) => {
       </div>
       <div>
         {filters ? <div>
-          Filtro1
-          Filtro2
-          Filtro3
+          Próximamente
         </div> : ''}
       </div>
     </div> : ''}
