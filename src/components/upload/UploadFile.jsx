@@ -10,6 +10,13 @@ export default class UploadFile extends Component {
         xml: {}
     }
 
+    componentDidMount = () => {
+      let password = prompt('Ingrese la contraseña')
+      if(password === 'bdlacet2019') return
+      this.props.history.push('/')
+
+    }
+
     handleFile = e => {
       const { xml } = this.state
       let file
