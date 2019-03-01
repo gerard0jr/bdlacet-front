@@ -53,7 +53,7 @@ handleKeyPress = e => {
 
 clearSearch = () => {
   document.getElementById('search-navbar').value = ''
-  this.setState({searchInput:{input: ''}, results: [], searched: false, logoWidth: '30%', searchedWord: ''})
+  this.setState({searchInput:{input: ''}, results: [], searched: false, logoWidth: '30%', searchedWord: '', filters: {}, filterSubmitted: {}})
 }
 
 handleFilters = e => {
