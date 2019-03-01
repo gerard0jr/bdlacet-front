@@ -92,7 +92,7 @@ code {
 }
 
 input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px white inset;
+  box-shadow: 0 0 0px 150px white inset;
 }
 
 .text-field:focus{
@@ -144,6 +144,63 @@ input:-webkit-autofill {
 
 .transition-test{
   transition: 200ms display linear;
+}
+
+.filtros{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filtros > div {
+  width: auto;
+  margin: 0 1rem;
+}
+
+.panel-responsive{
+  width:80%;
+  background-color: #f7f7f7; 
+  margin: 3px auto !important;
+}
+
+.pagination{
+  padding: 0px 0 0px 0px;
+}
+
+.pagination > div{
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+@media(max-width: 370px){
+  .panel-responsive{
+    width:60%;
+  } 
+  
+  .footer{
+    font-size: 0.5rem;
+  }
+}
+
+@media(max-width: 375px){
+ body{
+   font-size: 12px;
+ }
+}
+
+@media(max-width: 490px){
+  .panel-responsive{
+    width:70%;
+  } 
+  
+  .input-flex{
+   flex-direction: column;
+  }
+  
+  .input-flex > div{
+    margin: 10px 0;
+  }
 }
 
 @media(max-width: 600px){

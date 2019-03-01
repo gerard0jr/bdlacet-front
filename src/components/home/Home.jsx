@@ -2,17 +2,20 @@ import React, { Component } from 'react'
 import Navbar from './Navbar';
 import SearchComponent from './SearchComponent';
 import Footer from './Footer';
-import Results from './Results';
 import { searchDB } from '../../services/search'
 import DataFilters from './DataFilters';
+import CustomPaginationActionsTable from './CustomPaginationActionsTable';
 
 export default class Home extends Component {
 
 state = {
   searchInput: {},
+  searchedWord: '',
   results: [],
   searched: false,
-  logoWidth: '30%'
+  logoWidth: '30%',
+  filters: {},
+  filterSubmitted: {}
 }
 
 handleChange = e => {
@@ -24,25 +27,102 @@ handleChange = e => {
 searchNow = e =>{
   e.preventDefault()
   const { searchInput } = this.state
-  searchDB(searchInput)
+  if(document.getElementById('main-search')){
+    if(document.getElementById('main-search').value !== '') {
+      searchDB(searchInput)
     .then(results => {
-      this.setState({results: results.data, logoWidth: '15%', searched: true})
+      this.setState({results: results.data, logoWidth: '20%', searched: true, searchedWord: searchInput.input, searchInput: {input: ''}})
     }) //status and data
     .catch(err => console.log(err))
+    }
+  }
+  if(document.getElementById('search-navbar').value !== '') {
+    searchDB(searchInput)
+    .then(results => {
+      this.setState({results: results.data, logoWidth: '20%', searched: true, searchedWord: searchInput.input, searchInput: {input: ''}})
+    }) //status and data
+    .catch(err => console.log(err))
+  }
 }
 
-clearSearch = () => this.setState({searchInput:{input: ''}, results: [], searched: false, logoWidth: '30%'})
+handleKeyPress = e => {
+  if(e.key === 'Enter'){
+    this.searchNow(e)
+  }
+}
+
+clearSearch = () => {
+  document.getElementById('search-navbar').value = ''
+  this.setState({searchInput:{input: ''}, results: [], searched: false, logoWidth: '30%', searchedWord: ''})
+}
+
+handleFilters = e => {
+  const { filters } = this.state
+  filters[e.target.id] = e.target.value
+  this.setState({filters})
+}
+
+applyFilters = () => {
+  const { filters } = this.state
+  this.setState({filterSubmitted:{...filters}})
+}
+
+handleDelete = data => {
+  const { filterSubmitted, filters } = this.state
+  switch(data){
+    case 'distribution':
+      document.getElementById('distribution').value = ''
+      filters.distribution = ''
+      filterSubmitted.distribution = ''
+      this.setState({filterSubmitted, filters})
+      return
+    case 'lifeForms':
+      document.getElementById('lifeForms').value=''
+      filters.lifeForms = ''
+      filterSubmitted.lifeForms = ''
+      this.setState({filterSubmitted, filters})
+      return
+    case 'references':
+      document.getElementById('references').value=''
+      filters.references = ''
+      filterSubmitted.references = ''
+      this.setState({filterSubmitted, filters})
+      return
+    case 'others':
+      document.getElementById('others').value=''
+      filters.others = ''
+      filterSubmitted.others = ''
+      this.setState({filterSubmitted, filters})
+      return
+    case 'ambient':
+      document.getElementById('ambient').value=''
+      filters.ambient = ''
+      filterSubmitted.ambient = ''
+      this.setState({filterSubmitted, filters})
+      return
+    case 'taxonomic':
+      document.getElementById('taxonomic').value=''
+      filters.taxonomic = ''
+      filterSubmitted.taxonomic = ''
+      this.setState({filterSubmitted, filters})
+      return
+    default:
+      return
+  }}
 
   render() {
-    const { searchInput, results, logoWidth, searched } = this.state
-    const { handleChange, searchNow, clearSearch } = this
-    console.log(results)
+    const { searchInput, results, logoWidth, searched, searchedWord, filterSubmitted } = this.state
+    const { handleChange, searchNow, clearSearch, handleKeyPress, handleFilters, applyFilters, handleDelete } = this
     return (
       <div className="background" style={{height: "100%"}}>
-        <Navbar handleChange={handleChange} searchNow={searchNow} clearSearch={clearSearch} />
-        <SearchComponent searchInput={searchInput} handleChange={handleChange} searchNow={searchNow} logoWidth={logoWidth} />
-        <DataFilters searched={searched}/>
-        <Results searchInput={searchInput} results={results} searched={searched} />
+        <Navbar handleKeyPress={handleKeyPress} searchInput={searchInput} 
+          handleChange={handleChange} searchNow={searchNow} clearSearch={clearSearch} />
+        <SearchComponent searchInput={searchInput} handleChange={handleChange} 
+          searchNow={searchNow} logoWidth={logoWidth} searched={searched} 
+          searchedWord={searchedWord} handleKeyPress={handleKeyPress} filterSubmitted={filterSubmitted}
+          handleDelete={handleDelete}/>
+        <DataFilters handleFilters={handleFilters} applyFilters={applyFilters} searched={searched}/>
+        <CustomPaginationActionsTable filterSubmitted={filterSubmitted} results={results} searched={searched} searchInput={searchInput}/>
         <Footer/>
       </div>
     )

@@ -26,7 +26,7 @@ export default class UploadFile extends Component {
       e.preventDefault()
       const { xml } = this.state        
     
-      axios.post('http://localhost:3000/upload', xml, {
+      axios.post('http://bdlacet.mx/upload', xml, {
         onUploadProgress: ProgressEvent => {
           this.setState({loaded: (ProgressEvent.loaded / ProgressEvent.total * 100)})
         }
