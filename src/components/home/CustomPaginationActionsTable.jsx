@@ -123,23 +123,23 @@ class CustomPaginationActionsTable extends React.Component {
     const { rowsPerPage, page} = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
     const filtered = results.filter(el => filterSubmitted ?
-      (filterSubmitted.distribution ? el.custom2.includes(filterSubmitted.distribution) : true) &&
-                (filterSubmitted.lifeForms ?  el.custom4.includes(filterSubmitted.lifeForms) : true) &&
-                (filterSubmitted.references ?  el.custom1.includes(filterSubmitted.references) : true) &&
-                (filterSubmitted.others ?  el.custom5.includes(filterSubmitted.others) : true) &&
-                (filterSubmitted.ambient ?  el.custom3.includes(filterSubmitted.ambient) : true) &&
-                (filterSubmitted.taxonomic ?  el.misc1.includes(filterSubmitted.taxonomic) : true) : el)
+      (filterSubmitted.distribution ? el.custom2.toLowerCase().includes(filterSubmitted.distribution.toLowerCase()) : true) &&
+                (filterSubmitted.lifeForms ?  el.custom4.toLowerCase().includes(filterSubmitted.lifeForms.toLowerCase()) : true) &&
+                (filterSubmitted.references ?  el.custom1.toLowerCase().includes(filterSubmitted.references.toLowerCase()) : true) &&
+                (filterSubmitted.others ?  el.custom5.toLowerCase().includes(filterSubmitted.others.toLowerCase()) : true) &&
+                (filterSubmitted.ambient ?  el.custom3.toLowerCase().includes(filterSubmitted.ambient.toLowerCase()) : true) &&
+                (filterSubmitted.taxonomic ?  el.misc1.toLowerCase().includes(filterSubmitted.taxonomic.toLowerCase()) : true) : el)
     return (<>
     {searched ? <div className="transition-test" style={{margin:"1rem 0 3rem 0"}}>
         {results ?
             <div className="results-quantity">
                  {Object.keys(filterSubmitted).length > 0 ? results.filter(el =>
-                (filterSubmitted.distribution ? el.custom2.includes(filterSubmitted.distribution) : true) &&
-                (filterSubmitted.lifeForms ?  el.custom4.includes(filterSubmitted.lifeForms) : true) &&
-                (filterSubmitted.references ?  el.custom1.includes(filterSubmitted.references) : true) &&
-                (filterSubmitted.others ?  el.custom5.includes(filterSubmitted.others) : true) &&
-                (filterSubmitted.ambient ?  el.custom3.includes(filterSubmitted.ambient) : true) &&
-                (filterSubmitted.taxonomic ?  el.misc1.includes(filterSubmitted.taxonomic) : true)
+                (filterSubmitted.distribution ? el.custom2.toLowerCase().includes(filterSubmitted.distribution.toLowerCase()) : true) &&
+                (filterSubmitted.lifeForms ?  el.custom4.toLowerCase().includes(filterSubmitted.lifeForms.toLowerCase()) : true) &&
+                (filterSubmitted.references ?  el.custom1.toLowerCase().includes(filterSubmitted.references.toLowerCase()) : true) &&
+                (filterSubmitted.others ?  el.custom5.toLowerCase().includes(filterSubmitted.others.toLowerCase()) : true) &&
+                (filterSubmitted.ambient ?  el.custom3.toLowerCase().includes(filterSubmitted.ambient.toLowerCase()) : true) &&
+                (filterSubmitted.taxonomic ?  el.misc1.toLowerCase().includes(filterSubmitted.taxonomic.toLowerCase()) : true)
                 ).length : results.length} resultados
             </div> : ''}
         <div className={classes.tableWrapper}>
@@ -147,12 +147,12 @@ class CustomPaginationActionsTable extends React.Component {
             <TableBody>
               {Object.keys(filterSubmitted).length > 0 ?
               results.filter(el =>
-                (filterSubmitted.distribution ? el.custom2.includes(filterSubmitted.distribution) : true) &&
-                (filterSubmitted.lifeForms ?  el.custom4.includes(filterSubmitted.lifeForms) : true) &&
-                (filterSubmitted.references ?  el.custom1.includes(filterSubmitted.references) : true) &&
-                (filterSubmitted.others ?  el.custom5.includes(filterSubmitted.others) : true) &&
-                (filterSubmitted.ambient ?  el.custom3.includes(filterSubmitted.ambient) : true) &&
-                (filterSubmitted.taxonomic ?  el.misc1.includes(filterSubmitted.taxonomic) : true)
+                (filterSubmitted.distribution ? el.custom2.toLowerCase().includes(filterSubmitted.distribution.toLowerCase()) : true) &&
+                (filterSubmitted.lifeForms ?  el.custom4.toLowerCase().includes(filterSubmitted.lifeForms.toLowerCase()) : true) &&
+                (filterSubmitted.references ?  el.custom1.toLowerCase().includes(filterSubmitted.references.toLowerCase()) : true) &&
+                (filterSubmitted.others ?  el.custom5.toLowerCase().includes(filterSubmitted.others.toLowerCase()) : true) &&
+                (filterSubmitted.ambient ?  el.custom3.toLowerCase().includes(filterSubmitted.ambient.toLowerCase()) : true) &&
+                (filterSubmitted.taxonomic ?  el.misc1.toLowerCase().includes(filterSubmitted.taxonomic.toLowerCase()) : true)
                 ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(result => (
                   <TableRow key={result.title}>
                     <ExpansionPanel className="panel-responsive">
