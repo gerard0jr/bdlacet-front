@@ -5,12 +5,12 @@ const SearchComponent = ({searchNow, handleChange, filterSubmitted, logoWidth, s
   return (
     <div className="main-search">
       <img width={logoWidth} src="/img/logo.png" alt="bdLogo"/>
-      {searched ? <div>Resultados relacionados a <b>'{searchedWord}'</b></div> : <div>
-      <p>Un buscador de <b>algas </b>pensado para ficólogos y no tan ficólogos</p>
+      {searched ? <div style={{margin:"0 0 1rem 0"}}>Resultados relacionados a <b>'{searchedWord}'</b></div> :
+      <p>Un buscador de <b>algas </b>pensado para ficólogos y no tan ficólogos</p>}
       <div className="input-flex">
         <TextField
           className="text-field"
-          label="Término a buscar..."
+          label="Nombre del género o especie a buscar"
           variant="outlined"
           name='input'
           id='main-search'
@@ -21,7 +21,6 @@ const SearchComponent = ({searchNow, handleChange, filterSubmitted, logoWidth, s
           Buscar
         </Button>
       </div>
-      </div>}
       {Object.keys(filterSubmitted).length > 0 ? <div style={{display:'flex', justifyContent:'center', margin:"1rem"}}>
        {filterSubmitted.distribution ? filterSubmitted.distribution.length > 0 ? <div style={{margin:'0 1rem'}}><Chip deleteIcon="default" onDelete={() => handleDelete('distribution')} label={`Distribución: ${filterSubmitted.distribution}`}/></div>: '' : ''}
        {filterSubmitted.lifeForms ? filterSubmitted.lifeForms.length > 0 ?  <div style={{margin:'0 1rem'}}><Chip deleteIcon="default" onDelete={() => handleDelete('lifeForms')} label={`Formas de vida: ${filterSubmitted.lifeForms}`}/></div> : '' : ''}

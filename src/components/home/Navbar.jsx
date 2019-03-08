@@ -9,7 +9,7 @@ const Navbar = ({clearSearch, handleChange, handleKeyPress, searchNow}) => {
         <Toolbar>
           <img onClick={clearSearch} style={{cursor:"pointer",marginLeft:"1rem",width:"90px"}} src="/img/small-logo.png" alt="navbar-logo"/>
           <div className="grow"/>
-          <div className="search">
+          {/* <div className="search">
             <div className="search-icon">
               <SearchIcon style={{cursor:"pointer"}} onClick={searchNow} />
             </div>
@@ -22,7 +22,7 @@ const Navbar = ({clearSearch, handleChange, handleKeyPress, searchNow}) => {
               onChange={handleChange}
               onKeyPress={handleKeyPress}
             />
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>

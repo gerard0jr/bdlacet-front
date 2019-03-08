@@ -164,8 +164,6 @@ class CustomPaginationActionsTable extends React.Component {
                               <p><b>Nombre de la especie:</b> {result.title.slice(1,-1)}</p> 
                               <p><b>División, Orden:</b> {result.notes.slice(1,-1)}</p> 
                               <p><b>Comentarios taxonómicos:</b> {result.misc1.slice(1,-1)}</p> 
-                              <p><b>Selección:</b> {result.misc2.slice(1,-1)}</p> 
-                              <p><b>Descripción:</b> {result.misc3.slice(1,-1)}</p> 
                               <p><b>Referencias:</b>{result.custom1.slice(1,-1)}</p> 
                               <p><b>Distribución, Localidades:</b> {result.custom2.slice(1,-1)}</p> 
                               <p><b>Ambientes:</b> {result.custom3.slice(1,-1)}</p> 
@@ -187,8 +185,6 @@ class CustomPaginationActionsTable extends React.Component {
                             <p><b>Nombre de la especie:</b> {result.title.slice(1,-1)}</p> 
                             <p><b>División, Orden:</b> {result.notes.slice(1,-1)}</p> 
                             <p><b>Comentarios taxonómicos:</b> {result.misc1.slice(1,-1)}</p> 
-                            <p><b>Selección:</b> {result.misc2.slice(1,-1)}</p> 
-                            <p><b>Descripción:</b> {result.misc3.slice(1,-1)}</p> 
                             <p><b>Referencias:</b>{result.custom1.slice(1,-1)}</p> 
                             <p><b>Distribución, Localidades:</b> {result.custom2.slice(1,-1)}</p> 
                             <p><b>Ambientes:</b> {result.custom3.slice(1,-1)}</p> 

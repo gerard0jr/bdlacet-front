@@ -172,6 +172,12 @@ input:-webkit-autofill {
   justify-content: center;
 }
 
+label{
+  background-color: white;
+  padding: 0 5px 0 0 !important;
+  box-sizing: border-box;
+}
+
 
 @media(max-width: 370px){
   .panel-responsive{

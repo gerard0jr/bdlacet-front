@@ -28,12 +28,14 @@ searchNow = e =>{
   e.preventDefault()
   const { searchInput } = this.state
   if(document.getElementById('main-search')){
-    if(document.getElementById('main-search').value !== '') {
+    if(document.getElementById('main-search').value !== '' && document.getElementById('main-search').value.length > 3) {
       searchDB(searchInput)
     .then(results => {
-      this.setState({results: results.data, logoWidth: '20%', searched: true, searchedWord: searchInput.input, searchInput: {input: ''}})
+      this.setState({results: results.data, lengthErr: false, logoWidth: '20%', searched: true, searchedWord: searchInput.input})
     }) //status and data
     .catch(err => console.log(err))
+    } else{
+      this.setState({lengthErr: true})
     }
   }
   if(document.getElementById('search-navbar').value !== '') {
@@ -52,7 +54,8 @@ handleKeyPress = e => {
 }
 
 clearSearch = () => {
-  document.getElementById('search-navbar').value = ''
+  // document.getElementById('search-navbar').value = ''
+  document.getElementById('main-search').value = ''
   this.setState({searchInput:{input: ''}, results: [], searched: false, logoWidth: '30%', searchedWord: '', filters: {}, filterSubmitted: {}})
 }
 
@@ -111,7 +114,7 @@ handleDelete = data => {
   }}
 
   render() {
-    const { searchInput, results, logoWidth, searched, searchedWord, filterSubmitted } = this.state
+    const { searchInput, results, logoWidth, searched, searchedWord, filterSubmitted, lengthErr } = this.state
     const { handleChange, searchNow, clearSearch, handleKeyPress, handleFilters, applyFilters, handleDelete } = this
     return (
       <div className="background" style={{height: "100%"}}>
@@ -121,6 +124,7 @@ handleDelete = data => {
           searchNow={searchNow} logoWidth={logoWidth} searched={searched} 
           searchedWord={searchedWord} handleKeyPress={handleKeyPress} filterSubmitted={filterSubmitted}
           handleDelete={handleDelete}/>
+        {lengthErr ? <p style={{margin:"1rem 0", fontSize:"0.7rem"}}>Introducir mínimo 4 letras</p> : '' }
         <DataFilters handleFilters={handleFilters} applyFilters={applyFilters} searched={searched}/>
         <CustomPaginationActionsTable filterSubmitted={filterSubmitted} results={results} searched={searched} searchInput={searchInput}/>
         <Footer/>
