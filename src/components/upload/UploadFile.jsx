@@ -52,7 +52,7 @@ export default class UploadFile extends Component {
               this.setState({loaded: (ProgressEvent.loaded / ProgressEvent.total * 100)})
             }
           })
-          .then(res => this.setState({registers: res, message: 'Subido correctamente'}))
+          .then(res => this.setState({registers: res, message: 'Cargado correctamente'}))
           .catch(err => this.setState({message: err}))
         })
         .catch(err => err)
@@ -76,14 +76,14 @@ export default class UploadFile extends Component {
             <input type="file" accept="text/xml" onChange={handleFile}/>
             <button onClick={sendFile}>Subir</button>
         </form>
-        {deleting ? <div> <p>Por favpr espere, vamos a preparar la base de datos.</p> <p>Borrando registros anteriores...</p></div> : '' }
-        {creating ? <div>OK! <br/> <br/> Preparando nueva base de datos...</div> : '' }
+        {deleting ? <div> <p>Por favor espere, vamos a preparar la base de datos. Esto puede demorar unos minutos.</p> <p>Limpiando registros anteriores...</p></div> : '' }
+        {creating ? <div>OK! <br/> <br/> Preparando la tabla...</div> : '' }
         {done ? <div>OK!</div> : '' }
-        {loaded !== 0 ? <div> <p>{Math.round(loaded,2) } %</p> {registers.data ? '' : <small>Espere... cargando XML, puede demorar varios segundo <CircularProgress/> </small>} </div> : ''}
+        {loaded !== 0 ? <div> <p>{Math.round(loaded,2) } %</p> {registers.data ? '' : <small>Cargando XML, puede demorar varios segundos <CircularProgress/> </small>} </div> : ''}
         <div style={{margin:"1rem 0"}}>{ message ? message : ''}</div>
         {info.data || info.data === '' ? <div style={{margin:"2rem 0 1rem 0"}}>Registros anteriores en la base de datos: {info.data.length}</div> : <div>Cargando número de registros... <CircularProgress/></div>}
         {registers.data ? <div style={{margin: "1rem 0"}}>
-          <p>Registros subidos a la base de datos: {registers.data.affectedRows}</p> 
+          <p>Registros cargados en la base de datos: {registers.data.affectedRows}</p> 
         </div> : '' }
       </div>
     )
