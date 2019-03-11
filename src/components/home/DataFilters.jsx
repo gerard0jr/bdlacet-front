@@ -35,12 +35,6 @@ const DataFilters = ({searched, handleFilters, applyFilters}) => {
 
           <Grid container alignItems="flex-end">
             <Grid item>
-              <TextField onChange={handleFilters} id="references" label="Referencias" />
-            </Grid>
-          </Grid>
-
-          <Grid container alignItems="flex-end">
-            <Grid item>
               <TextField onChange={handleFilters} id="others" label="Otros registros" />
             </Grid>
           </Grid>
@@ -50,6 +44,13 @@ const DataFilters = ({searched, handleFilters, applyFilters}) => {
               <TextField onChange={handleFilters} id="taxonomic" label="C. taxonómico" />
             </Grid>
           </Grid>
+
+          <Grid container alignItems="flex-end">
+            <Grid item>
+              <TextField onChange={handleFilters} id="references" label="Referencias" />
+            </Grid>
+          </Grid>
+
           <div style={{margin:"10px", width:"100%"}}>
             <Button onClick={applyFilters} variant="contained">Filtrar</Button>
           </div>
