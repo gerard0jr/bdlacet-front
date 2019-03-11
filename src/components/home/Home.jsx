@@ -38,13 +38,13 @@ searchNow = e =>{
       this.setState({lengthErr: true})
     }
   }
-  if(document.getElementById('search-navbar').value !== '') {
-    searchDB(searchInput)
-    .then(results => {
-      this.setState({results: results.data, logoWidth: '20%', searched: true, searchedWord: searchInput.input, searchInput: {input: ''}})
-    }) //status and data
-    .catch(err => console.log(err))
-  }
+  // if(document.getElementById('search-navbar').value !== '') {
+  //   searchDB(searchInput)
+  //   .then(results => {
+  //     this.setState({results: results.data, logoWidth: '20%', searched: true, searchedWord: searchInput.input, searchInput: {input: ''}})
+  //   }) //status and data
+  //   .catch(err => console.log(err))
+  // }
 }
 
 handleKeyPress = e => {

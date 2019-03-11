@@ -10,7 +10,10 @@ export default class UploadFile extends Component {
         message: '',
         registers: {},
         xml: {},
-        info: []
+        info: [],
+        deleting: false,
+        creating: false,
+        done: false
     }
 
     componentDidMount = () => {
@@ -34,16 +37,27 @@ export default class UploadFile extends Component {
     
     sendFile = e => {
       e.preventDefault()
-      const { xml } = this.state        
+      const { xml, deleting, creating, done } = this.state        
       if(Object.keys(xml).length === 0) return
-
-      axios.post('https://bdlacet.mx/upload', xml, {
-        onUploadProgress: ProgressEvent => {
-          this.setState({loaded: (ProgressEvent.loaded / ProgressEvent.total * 100)})
-        }
+      
+      this.setState({deleting: true})
+      axios.get('https://bdlacet.mx/dropTable')
+      .then(res => {
+        this.setState({creating: true})
+        axios.get('https://bdlacet.mx/createTable')
+        .then(created => {
+          this.setState({done: true})
+          axios.post('https://bdlacet.mx/upload', xml, {
+            onUploadProgress: ProgressEvent => {
+              this.setState({loaded: (ProgressEvent.loaded / ProgressEvent.total * 100)})
+            }
+          })
+          .then(res => this.setState({registers: res, message: 'Subido correctamente'}))
+          .catch(err => this.setState({message: err}))
+        })
+        .catch(err => err)
       })
-      .then(res => this.setState({registers: res, message: 'Subido correctamente'}))
-      .catch(err => this.setState({message: err}))
+      .catch(err => err)
     }
 
     getInfo = () => 
@@ -52,7 +66,7 @@ export default class UploadFile extends Component {
         .catch(err => console.log(err))
 
     render() {
-        const { loaded, message, info, registers } = this.state
+        const { loaded, message, info, registers, deleting, creating, done } = this.state
         const { handleFile, sendFile } = this
     return (
       <div>
@@ -62,12 +76,14 @@ export default class UploadFile extends Component {
             <input type="file" accept="text/xml" onChange={handleFile}/>
             <button onClick={sendFile}>Subir</button>
         </form>
-        {loaded !== 0 ? <div> <p>{Math.round(loaded,2) } %</p> {registers.data ? '' : <small>Espere... puede demorar varios segundos la subida del XML <CircularProgress/> </small>} </div> : ''}
+        {deleting ? <div> <p>Por favpr espere, vamos a preparar la base de datos.</p> <p>Borrando registros anteriores...</p></div> : '' }
+        {creating ? <div>OK! <br/> <br/> Preparando nueva base de datos...</div> : '' }
+        {done ? <div>OK!</div> : '' }
+        {loaded !== 0 ? <div> <p>{Math.round(loaded,2) } %</p> {registers.data ? '' : <small>Espere... cargando XML, puede demorar varios segundo <CircularProgress/> </small>} </div> : ''}
         <div style={{margin:"1rem 0"}}>{ message ? message : ''}</div>
-        {info.data || info.data === '' ? <div style={{margin:"2rem 0 1rem 0"}}>Registros en la base de datos: {info.data.length}</div> : <div>Cargando número de registros... <CircularProgress/></div>}
+        {info.data || info.data === '' ? <div style={{margin:"2rem 0 1rem 0"}}>Registros anteriores en la base de datos: {info.data.length}</div> : <div>Cargando número de registros... <CircularProgress/></div>}
         {registers.data ? <div style={{margin: "1rem 0"}}>
           <p>Registros subidos a la base de datos: {registers.data.affectedRows}</p> 
-          <p>Registros totales: {info.data.length + registers.data.affectedRows}</p> 
         </div> : '' }
       </div>
     )
