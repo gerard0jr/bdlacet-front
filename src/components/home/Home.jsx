@@ -118,8 +118,8 @@ handleDelete = data => {
     const { handleChange, searchNow, clearSearch, handleKeyPress, handleFilters, applyFilters, handleDelete } = this
     return (
       <div className="background" style={{height: "100%"}}>
-        <Navbar handleKeyPress={handleKeyPress} searchInput={searchInput} 
-          handleChange={handleChange} searchNow={searchNow} clearSearch={clearSearch} />
+        {/* <Navbar handleKeyPress={handleKeyPress} searchInput={searchInput} 
+          handleChange={handleChange} searchNow={searchNow} clearSearch={clearSearch} /> */}
         <SearchComponent searchInput={searchInput} handleChange={handleChange} 
           searchNow={searchNow} logoWidth={logoWidth} searched={searched} 
           searchedWord={searchedWord} handleKeyPress={handleKeyPress} filterSubmitted={filterSubmitted}
@@ -127,7 +127,7 @@ handleDelete = data => {
         {lengthErr ? <p style={{margin:"1rem 0", fontSize:"0.7rem"}}>Introducir mínimo 4 letras</p> : '' }
         <DataFilters handleFilters={handleFilters} applyFilters={applyFilters} searched={searched}/>
         <CustomPaginationActionsTable filterSubmitted={filterSubmitted} results={results} searched={searched} searchInput={searchInput}/>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     )
   }
